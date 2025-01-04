@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Event Task</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        form {
+            max-width: 400px;
+            margin: auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+        }
+        .output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #e9ffe9;
+        }
+    </style>
+</head>
+<body>
+    <h1>Order Form</h1>
+    <form id="orderForm">
+        <label for="username">Username:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+
+        <label for="age">Age:</label><br>
+        <input type="number" id="age" name="age" min="1" required><br><br>
+
+        <label for="gender">Gender:</label><br>
+        <select id="gender" name="gender" required>
+            <option value="">Select</option>
+            <option value="Male">Male</option>
+            <option value="Female">Female</option>
+            <option value="Other">Other</option>
+        </select><br><br>
+
+        <label>Order Type:</label><br>
+        <input type="checkbox" id="shawarma" name="orderType" value="Shawarma">
+        <label for="shawarma">Shawarma</label><br>
+
+        <input type="checkbox" id="zinger" name="orderType" value="Zinger">
+        <label for="zinger">Zinger</label><br>
+
+        <input type="checkbox" id="burger" name="orderType" value="Burger">
+        <label for="burger">Burger</label><br><br>
+
+        <label>Order Option:</label><br>
+        <input type="radio" id="combo" name="orderOption" value="Combo" required>
+        <label for="combo">Combo</label><br>
+
+        <input type="radio" id="sandwich" name="orderOption" value="Sandwich" required>
+        <label for="sandwich">Sandwich</label><br><br>
+
+        <button type="button" onclick="submitForm()">Submit</button>
+    </form>
+
+    <div class="output" id="output"></div>
+
+    <script>
+        function submitForm() {
+        
+            const username = document.getElementById('username').value;
+            const age = document.getElementById('age').value;
+            const gender = document.getElementById('gender').value;
+
+            
+            const orderTypes = Array.from(document.querySelectorAll('input[name="orderType"]:checked'))
+                .map(checkbox => checkbox.value);
+
+            
+            const orderOption = document.querySelector('input[name="orderOption"]:checked').value;
+
+            
+            const outputDiv = document.getElementById('output');
+            outputDiv.innerHTML = `
+                <h2>Order Details</h2>
+                <p><strong>Username:</strong> ${username}</p>
+                <p><strong>Age:</strong> ${age}</p>
+                <p><strong>Gender:</strong> ${gender}</p>
+                <p><strong>Order Types:</strong> ${orderTypes.join(', ')}</p>
+                <p><strong>Order Option:</strong> ${orderOption}</p>
+            `;
+        }
+    </script>
+</body>
+</html>
